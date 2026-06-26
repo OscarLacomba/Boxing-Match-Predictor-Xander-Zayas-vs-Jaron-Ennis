@@ -1,0 +1,47 @@
+# ============================================================
+# 🥊 Boxing AI Predictor — Zayas vs Ennis
+# requirements.txt — GitHub Repository
+# Python 3.11+ recommended | Updated: June 2026
+# ============================================================
+
+# ── Core Data Science ─────────────────────────────────────
+numpy>=2.0.0
+pandas>=2.2.0
+scipy>=1.13.0
+
+# ── Machine Learning ──────────────────────────────────────
+scikit-learn>=1.9.0
+xgboost>=3.0.0
+lightgbm>=4.6.0
+
+# ── Model Explainability ──────────────────────────────────
+shap>=0.46.0
+
+# ── Model Persistence ─────────────────────────────────────
+joblib>=1.4.0
+
+# ── Visualization ─────────────────────────────────────────
+matplotlib>=3.9.0
+seaborn>=0.13.0
+plotly>=5.22.0
+
+# ── Web Application ───────────────────────────────────────
+streamlit>=1.45.0
+
+# ── Computer Vision / YOLO ────────────────────────────────
+ultralytics>=8.3.0          # YOLOv8 / YOLO11 / YOLO26
+opencv-python-headless>=4.10.0
+Pillow>=10.4.0
+
+# ── Dataset Sources ───────────────────────────────────────
+roboflow>=1.1.48            # Roboflow Universe datasets
+kagglehub>=0.3.0            # Kaggle dataset downloads
+
+# ── Notebook / Colab Utilities ────────────────────────────
+ipykernel>=6.29.0
+ipywidgets>=8.1.0
+tqdm>=4.66.0
+
+# ── Utilities ─────────────────────────────────────────────
+requests>=2.32.0
+python-dotenv>=1.0.0
