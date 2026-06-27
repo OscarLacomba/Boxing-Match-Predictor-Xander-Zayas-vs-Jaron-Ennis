@@ -15,7 +15,7 @@ from datetime import datetime
 
 # ─── Page Config ──────────────────────────────────────────────
 st.set_page_config(
-    page_title="🥊 Boxing AI Predictor",
+    page_title="🥊 BOXING PREDICTOR",
     page_icon="🥊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -267,8 +267,9 @@ if 'username' not in st.session_state:
     st.session_state.username = ''
 
 # ─── Header ───────────────────────────────────────────────────
-st.markdown('<h1 class="main-header">🥊 BOXING AI PREDICTOR</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-header">🥊 BOXING PREDICTOR</h1><h2 style="text-align:center; color:#FFD700; font-family:Bebas Neue,cursive; letter-spacing:4px; font-size:1.6rem; margin-top:-1rem;">ZAYAS vs BOOTS ENNIS · JUNE 27, 2026</h2>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">Machine Learning · YOLO Vision Analysis · Real-time Predictions</p>', unsafe_allow_html=True)
+st.markdown('<p style="text-align:center; color:#555; font-size:0.85rem; margin-top:-0.5rem; letter-spacing:2px;">BY OSCAR MARTINEZ</p>', unsafe_allow_html=True)
 
 # ─── Sidebar ──────────────────────────────────────────────────
 with st.sidebar:
@@ -507,14 +508,16 @@ with tab2:
     • Experience edge: <strong>33-0</strong> (29 KOs) vs Zayas's 18-0<br>
     • Reach advantage: <strong>+3 inches</strong> reach advantage<br>
     • More elite competition faced<br>
-    • Moving UP from Welterweight (147→154): carries natural size of a welterweight<br><br>
+    • Moving UP from Welterweight (147→154): carries natural size of a welterweight<br>
+    • Est. fight night weight: <strong>~164 lbs</strong> (+10 lbs rehydration) → size advantage in ring<br><br>
 
     <strong>Factors favoring Xander Zayas:</strong><br>
     • Youth (23 vs 27): <strong>4-year age advantage</strong><br>
     • High activity rate and momentum<br>
     • Strong Puerto Rican support (potential home crowd advantage)<br>
     • Improving rapidly as a young undefeated prospect<br>
-    • <strong>Natural 154 lbs fighter</strong> — no weight cut stress, full strength at fight night<br><br>
+    • <strong>Natural 154 lbs fighter</strong> — minimal cut (+6 lbs rehydration) → est. <strong>~160 lbs</strong> fight night<br>
+    • Better hydrated entering the ring → potential <strong>stamina advantage in late rounds</strong><br><br>
 
     <em style="color:#888;">⚠️ Note: Boxing has inherent unpredictability. This is an AI prediction for educational purposes.</em>
     </span>
@@ -661,6 +664,115 @@ with tab3:
     However, Ennis's elite KO power (87.9%), experience (33-0), and rankings (#1 globally) override this factor.
     """)
 
+
+    # ── Rehydration Analysis ──────────────────────────────────
+    st.markdown("---")
+    st.markdown("#### 💧 Rehydration Factor — Speculative Fight Night Weights")
+    st.markdown("*Based on historical data: at 154 lbs, fighters regain **6–12% body mass** overnight after weigh-in.*")
+
+    col_r1, col_r2, col_r3 = st.columns(3)
+    with col_r1:
+        st.markdown("""
+        <div class="stat-box">
+            <div class="stat-label">Official Weigh-in</div>
+            <div class="stat-value">154 lbs</div>
+            <div style="color:#888; font-size:0.8rem;">Both fighters — contracted weight</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with col_r2:
+        st.markdown("""
+        <div class="stat-box" style="border-color:#FF6B35;">
+            <div class="stat-label">🇵🇷 Zayas Fight Night</div>
+            <div class="stat-value" style="color:#FF6B35;">~160 lbs</div>
+            <div style="color:#888; font-size:0.8rem;">+6 lbs · Minimal cut (3.9%)</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with col_r3:
+        st.markdown("""
+        <div class="stat-box" style="border-color:#1E88E5;">
+            <div class="stat-label">🇺🇸 Ennis Fight Night</div>
+            <div class="stat-value" style="color:#1E88E5;">~164 lbs</div>
+            <div style="color:#888; font-size:0.8rem;">+10 lbs · Moderate cut (6.5%)</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Weight journey chart
+    import plotly.graph_objects as go
+    stages = ['Walking Weight', 'Weigh-in (Official)', 'Fight Night (Est.)']
+    zayas_w = [156, 154, 160]
+    ennis_w = [163, 154, 164]
+
+    fig_rehy = go.Figure()
+    fig_rehy.add_trace(go.Scatter(
+        x=stages, y=zayas_w, mode='lines+markers+text',
+        name='Zayas', line=dict(color='#FF6B35', width=3),
+        marker=dict(size=12), text=[f'{w} lbs' for w in zayas_w],
+        textposition='top center', textfont=dict(color='#FF6B35', size=12)
+    ))
+    fig_rehy.add_trace(go.Scatter(
+        x=stages, y=ennis_w, mode='lines+markers+text',
+        name='Ennis', line=dict(color='#1E88E5', width=3),
+        marker=dict(size=12), text=[f'{w} lbs' for w in ennis_w],
+        textposition='bottom center', textfont=dict(color='#1E88E5', size=12)
+    ))
+    fig_rehy.add_hline(y=154, line_dash='dash', line_color='#FFD700',
+                        annotation_text='154 lbs limit', annotation_font_color='#FFD700')
+    fig_rehy.update_layout(
+        plot_bgcolor='#0a0a0a', paper_bgcolor='#0a0a0a',
+        font=dict(color='white'),
+        yaxis=dict(title='Weight (lbs)', range=[148, 170], gridcolor='#222'),
+        xaxis=dict(title=''),
+        height=360,
+        legend=dict(orientation='h', y=1.05),
+        title=dict(text='💧 Weight Journey: Walk-in → Weigh-in → Fight Night', font=dict(color='gold'), x=0.5),
+        margin=dict(t=60, b=20),
+    )
+    st.plotly_chart(fig_rehy, use_container_width=True)
+
+    # Key insights
+    st.markdown("""
+    <div style="background:#111; border-left:4px solid #1E88E5; padding:1rem; border-radius:0 10px 10px 0; margin-top:0.5rem;">
+    <strong style="color:#FFD700;">⚡ Rehydration Key Insights</strong><br><br>
+    <span style="color:#ddd;">
+    • Both fighters weigh in at the <strong>same 154 lbs</strong> — but that's where equality ends<br>
+    • <strong style="color:#1E88E5;">Ennis</strong> enters the ring est. <strong>~4 lbs heavier</strong> (164 vs 160) — size advantage<br>
+    • <strong style="color:#FF6B35;">Zayas</strong> had a minimal cut → arrives <strong>better hydrated</strong>, potentially more stamina late rounds<br>
+    • Ennis cut harder (6.5% body mass) → higher <strong>fatigue & dehydration risk</strong><br>
+    • Historical ref: <em>Ryan Garcia was limited to +10 lbs rehydration vs Tank Davis (2023)</em>
+    </span>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Editable rehydration inputs
+    st.markdown("##### 🔧 Adjust Rehydration Estimates")
+    st.caption("Drag sliders to explore different scenarios:")
+    col_s1, col_s2 = st.columns(2)
+    with col_s1:
+        zayas_rehy = st.slider("Zayas rehydration (lbs)", 4, 15, 6, key="zayas_rehy")
+        zayas_fn = 154 + zayas_rehy
+        st.markdown(f"<div class='stat-box'><div class='stat-label'>Zayas Fight Night</div>"
+                    f"<div class='stat-value' style='color:#FF6B35;'>~{zayas_fn} lbs</div></div>",
+                    unsafe_allow_html=True)
+    with col_s2:
+        ennis_rehy = st.slider("Ennis rehydration (lbs)", 4, 20, 10, key="ennis_rehy")
+        ennis_fn = 154 + ennis_rehy
+        st.markdown(f"<div class='stat-box'><div class='stat-label'>Ennis Fight Night</div>"
+                    f"<div class='stat-value' style='color:#1E88E5;'>~{ennis_fn} lbs</div></div>",
+                    unsafe_allow_html=True)
+
+    diff = ennis_fn - zayas_fn
+    color_diff = '#1E88E5' if diff > 0 else '#FF6B35'
+    advantage = 'Ennis' if diff > 0 else 'Zayas' if diff < 0 else 'Even'
+    st.markdown(f"""
+    <div style="text-align:center; background:#1a1a1a; border-radius:10px; padding:0.8rem; margin-top:0.5rem;">
+        <span style="color:#888;">Fight night differential: </span>
+        <span style="color:{color_diff}; font-size:1.3rem; font-weight:700;">
+            {'+' if diff >= 0 else ''}{diff} lbs → {advantage} size advantage
+        </span>
+    </div>
+    """, unsafe_allow_html=True)
+
+
     # YOLO analysis
     st.markdown("---")
     st.markdown("#### 🎥 YOLO Computer Vision Punch Analysis")
@@ -697,7 +809,7 @@ with tab3:
     st.markdown("---")
     st.markdown("#### 📋 Historical Dataset Sample (Training Data)")
     st.dataframe(
-        df_hist.style.applymap(
+        df_hist.style.map(
             lambda x: 'color: #4CAF50' if x == 'A Wins' else ('color: #FF4444' if x == 'B Wins' else ''),
             subset=['Outcome']
         ),
@@ -807,7 +919,7 @@ with tab4:
 st.markdown("---")
 st.markdown("""
 <div style="text-align:center; color:#555; font-size:0.8rem; padding:1rem;">
-    🥊 Boxing AI Predictor | ML Models: Random Forest · XGBoost · LightGBM · Logistic Regression<br>
+    🥊 Boxing Predictor | ML Models: Random Forest · XGBoost · LightGBM · Logistic Regression<br>
     Vision: YOLOv8 Boxing Punch Recognition | Dataset: Kaggle Boxing Matches<br>
     Built with ❤️ using Streamlit · Hugging Face Spaces · Python
 </div>
